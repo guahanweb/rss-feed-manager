@@ -96,6 +96,8 @@ if ($category === 'contributors') {
 		}
 
         foreach ($items as $item) {
+            $author['id'] = $user->ID;
+            $item['author'] = $author;
             $full_list[strtotime($item['postDate'])] = $item;
         }
 
