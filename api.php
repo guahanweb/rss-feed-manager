@@ -95,7 +95,10 @@ if ($category === 'contributors') {
 			}
 		}
 
-        $full_list = array_merge($full_list, $items);
+        foreach ($items as $item) {
+            $full_list[strtotime($item['postDate'])] = $item;
+        }
+
 		$feeds[] = array(
 			'author' => $author,
 			'items' => $items
@@ -104,7 +107,9 @@ if ($category === 'contributors') {
 	
 	$data['category'] = $category;
 	$data['feeds'] = $feeds;
-    $data['list'] = $full_list;
+
+    krsort($full_list);
+    $data['list'] = array_slice($full_list, 0, 50);
 	sendResponse($data);
 }
 
