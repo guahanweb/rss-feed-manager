@@ -70,6 +70,7 @@ if ($category === 'contributors') {
 	$users = sortUsers(get_users(array('role' => 'contributor')));
 	
 	$feeds = array();
+    $full_list = array();
 	foreach ($users as $user) {
 		$author = array(
 			'website' => get_usermeta($user->ID, 'profilewebsitename'),
@@ -93,7 +94,8 @@ if ($category === 'contributors') {
 				$items = array();
 			}
 		}
-		
+
+        $full_list = array_merge($full_list, $items);
 		$feeds[] = array(
 			'author' => $author,
 			'items' => $items
@@ -102,6 +104,7 @@ if ($category === 'contributors') {
 	
 	$data['category'] = $category;
 	$data['feeds'] = $feeds;
+    $data['list'] = $full_list;
 	sendResponse($data);
 }
 
