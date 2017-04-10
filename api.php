@@ -10,6 +10,7 @@ function get_wp_base() {
 }
 
 define('BASE_PATH', get_wp_base().'/');
+date_default_timezone_set('America/Chicago');
 
 // Make the WP base function usable
 define('WP_USE_THEMES', false);
