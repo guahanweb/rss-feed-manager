@@ -10,7 +10,6 @@ function get_wp_base() {
 }
 
 define('BASE_PATH', get_wp_base().'/');
-date_default_timezone_set('America/Chicago');
 
 // Make the WP base function usable
 define('WP_USE_THEMES', false);
@@ -99,7 +98,12 @@ if ($category === 'contributors') {
         foreach ($items as $item) {
             $author['id'] = $user->ID;
             $item['author'] = $author;
-            $full_list[strtotime($item['postDate'])] = $item;
+
+            // offset datetime for Central timezone
+            $ts = strtotime($item['postDate']) - 18000;
+            $item['postDate'] = date('j M Y, g:i a', $ts);
+
+            $full_list[$ts] = $item;
         }
 
 		$feeds[] = array(
