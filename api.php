@@ -146,15 +146,15 @@ foreach ($posts as $post) {
 	}
 	
 	foreach ($items[0] as $item) {
-		$ts = strtotime($item['pubDate']);
+		$ts = strtotime($item['postDate']);
 		$item['new'] = (time() - $TIME_OFFSET) < $ts ? TRUE : FALSE;
 		$desc = substr(strip_tags($item['description']), 0, 200);
 
         // offset datetime for Central timezone
-        $ts = strtotime($details['pubDate']) - 18000;
+        $ts = strtotime($details['postDate']) - 18000;
         $item['postDate'] = date('j M Y, g:i a', $ts);
 
-        $dtails = array(
+        $details = array(
 			'title' => $item['title'],
 			'postDate' => $item['postDate'],
 			'link' => $item['link'],
