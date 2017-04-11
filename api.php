@@ -146,9 +146,14 @@ foreach ($posts as $post) {
 	}
 	
 	foreach ($items[0] as $item) {
-		$ts = strtotime($item['postDate']);
+		$ts = strtotime($item['pubDate']);
 		$item['new'] = (time() - $TIME_OFFSET) < $ts ? TRUE : FALSE;
 		$desc = substr(strip_tags($item['description']), 0, 200);
+
+        // offset datetime for Central timezone
+        $ts = strtotime($details['pubDate']) - 18000;
+        $item['postDate'] = date('j M Y, g:i a', $ts);
+
         $dtails = array(
 			'title' => $item['title'],
 			'postDate' => $item['postDate'],
@@ -157,10 +162,6 @@ foreach ($posts as $post) {
 			'description' => $desc,
 			'highlighted' => (strtotime($item['postDate']) > $highlight_offset) ? TRUE : FALSE
 		);
-
-        // offset datetime for Central timezone
-        $ts = strtotime($details['postDate']) - 18000;
-        $item['postDate'] = date('j M Y, g:i a', $ts);
 
         $full_list[$ts] = $details;
         $feeds[$post->ID]['items'][] = $details;
