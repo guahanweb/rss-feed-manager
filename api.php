@@ -133,6 +133,7 @@ $params = array(
 );
 
 $posts = get_posts($params);
+$full_list = array();
 foreach ($posts as $post) {
 	$feeds[$post->ID] = array(
 		'title' => $post->post_title,
@@ -148,16 +149,27 @@ foreach ($posts as $post) {
 		$ts = strtotime($item['postDate']);
 		$item['new'] = (time() - $TIME_OFFSET) < $ts ? TRUE : FALSE;
 		$desc = substr(strip_tags($item['description']), 0, 200);
-		$feeds[$post->ID]['items'][] = array(
+        $dtails = array(
 			'title' => $item['title'],
-			'postDate' => $item['pubDate'],
+			'postDate' => $item['postDate'],
 			'link' => $item['link'],
 			'new' => $item['new'],
 			'description' => $desc,
-			'highlighted' => (strtotime($item['pubDate']) > $highlight_offset) ? TRUE : FALSE
+			'highlighted' => (strtotime($item['postDate']) > $highlight_offset) ? TRUE : FALSE
 		);
+
+        // offset datetime for Central timezone
+        $ts = strtotime($details['postDate']) - 18000;
+        $item['postDate'] = date('j M Y, g:i a', $ts);
+
+        $full_list[$ts] = $details;
+        $feeds[$post->ID]['items'][] = $details;
 	}
 }
+
+// full list view
+ksort($full_list);
+$data['list'] = array_slice($full_list, 0, 50);
 
 $data['category'] = $category;
 $data['feeds'] = $feeds;
