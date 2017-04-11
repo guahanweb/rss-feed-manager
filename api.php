@@ -168,7 +168,7 @@ foreach ($posts as $post) {
 }
 
 // full list view
-ksort($full_list);
+krsort($full_list);
 $data['list'] = array_slice($full_list, 0, 50);
 
 $data['category'] = $category;
