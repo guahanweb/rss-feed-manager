@@ -139,8 +139,9 @@ foreach ($posts as $post) {
 		'title' => $post->post_title,
 		'items' => array()
 	);
-	
+
 	$items = get_post_meta($post->ID, 'current_records');
+
 	if (empty($items)) {
 		$items = array(array());
 	}
@@ -151,7 +152,7 @@ foreach ($posts as $post) {
 		$desc = substr(strip_tags($item['description']), 0, 200);
 
         // offset datetime for Central timezone
-        $ts = strtotime($details['postDate']) - 18000;
+        $ts = strtotime($item['postDate']) - 18000;
         $item['postDate'] = date('j M Y, g:i a', $ts);
 
         $details = array(
