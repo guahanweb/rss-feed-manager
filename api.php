@@ -161,7 +161,11 @@ foreach ($posts as $post) {
 			'link' => $item['link'],
 			'new' => $item['new'],
 			'description' => $desc,
-			'highlighted' => (strtotime($item['postDate']) > $highlight_offset) ? TRUE : FALSE
+			'highlighted' => (strtotime($item['postDate']) > $highlight_offset) ? TRUE : FALSE,
+            'author' => array(
+                'author' => $post->post_title,
+                'authorurl' => get_post_meta($post->ID, 'rss_manager_post_url', true)
+            )
 		);
 
         $full_list[$ts] = $details;
