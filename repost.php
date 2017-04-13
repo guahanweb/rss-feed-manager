@@ -54,8 +54,8 @@ if (!current_user_can('edit_posts')) {
 
 $post = array(
     'post_author' => isset($_POST['author']) ? intval($_POST['author']) : null,
-    'post_title' => isset($_POST['title']) ? trim($_POST['title']) : null,
-    'post_content' => isset($_POST['content']) ? trim($_POST['content']) : null,
+    'post_title' => isset($_POST['title']) ? utf8_encode(trim($_POST['title'])) : null,
+    'post_content' => isset($_POST['content']) ? trim($_POST['content']) : '',
     'post_status' => 'draft',
     'post_type' => 'post'
 );
