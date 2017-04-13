@@ -14,7 +14,7 @@ define('BASE_PATH', get_wp_base().'/');
 // Make the WP base function usable
 define('WP_USE_THEMES', false);
 global $wp, $wp_query, $wp_the_query, $wp_rewrite, $wp_did_header;
-require(BASE_PATH . 'wp-load.php');
+require(BASE_PATH . '/wp-load.php');
 
 require_once('lib/SimplePie/autoloader.php');
 $rss = new SimplePie();
