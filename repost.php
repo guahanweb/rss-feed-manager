@@ -69,11 +69,11 @@ if (is_null($post['post_title']) || is_null($post['post_author'])) {
 }
 
 // insert the post
-$id = wp_insert_post($post);
-if ($id == 0) {
+$id = wp_insert_post($post, true);
+if (is_wp_error($id)) {
     reply(array(
         'success' => false,
-        'errmsg' => 'Could not create new post'
+        'errmsg' => 'Could not create new post: ' . $id->get_error_message()
     ));
 }
 
