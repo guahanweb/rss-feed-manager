@@ -61,10 +61,10 @@ $post = array(
 );
 
 // validation
-if (is_null($post['post_title']) || is_null($post['post_content'])) {
+if (is_null($post['post_title']) || is_null($post['post_author'])) {
     reply(array(
         'success' => false,
-        'errmsg' => 'At least [title] and [content] are required'
+        'errmsg' => 'At least [title] and [author] are required'
     ));
 }
 
