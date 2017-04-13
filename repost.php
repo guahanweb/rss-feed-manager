@@ -31,7 +31,7 @@ if (is_null(BASE_PATH)) {
 // Make the WP base function usable
 define('WP_USE_THEMES', false);
 global $wp, $wp_query, $wp_the_query, $wp_rewrite, $wp_did_header;
-require(BASE_PATH . 'wp-load.php');
+require(BASE_PATH . '/wp-load.php');
 
 $supported_actions = array('repost');
 $action = isset($_POST['action']) ? trim($_POST['action']) : null;
